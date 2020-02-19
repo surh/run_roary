@@ -12,7 +12,7 @@ GBKS = Channel.fromPath("${params.indir}/*.gbk")
 
 
 process gbk2gff3{
-  label 'bioperl'
+  label 'py3'
   tag "$acc"
   publishDir "${params.outdir}/gff3/", mode: 'rellink'
 
@@ -23,7 +23,7 @@ process gbk2gff3{
   tuple file("${acc}.gff3") into GFF3S
 
   """
-  bp_genbank2gff3 $gbk_file --outdir - > ${acc}.gff3
+  ${workflow.projectDir}/gbk2gff3.py --input $gbk_file --output ${acc}.gff3
   """
 }
 
@@ -54,8 +54,8 @@ process{
   maxFors = 300
   errorStrategy = 'finish'
   stageInMode = 'rellink'
-  withLabel: 'bioperl'{
-    module = 'fraserconda'
+  withLabel: 'py3'{
+    module = 'anaconda'
     conda = '/opt/modules/pkgs/anaconda/3.6/envs/fraserconda'
   }
   withLabel: 'roary'{
