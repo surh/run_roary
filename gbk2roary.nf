@@ -43,3 +43,27 @@ mode run_roary{
   """
 }
 
+
+// Example nextflow.config
+/*
+process{
+  queue = 'hbfraser,hns'
+  maxFors = 300
+  errorStrategy = 'finish'
+  stageInMode = 'rellink'
+  withLabel: 'bioperl'{
+    module = 'fraserconda'
+    conda = '/opt/modules/pkgs/anaconda/3.6/envs/fraserconda'
+  }
+  withLabel: 'roary'{
+    module = 'anaconda'
+    conda = '/home/sur/.conda/envs/sur/'
+  }
+}
+
+executor{
+  name = 'slurm'
+  queueSize = 500
+  submitRateLitmit = '1 sec'
+}
+*/
