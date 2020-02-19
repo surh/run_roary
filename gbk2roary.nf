@@ -4,9 +4,12 @@ params.outdir = 'output'
 params.roary_threads = 8
 
 
-GBKS = Channel.fromPath("${params.indir}/*.gbk"}.
+GBKS = Channel.fromPath("${params.indir}/*.gbk")
   .map{gbk_file -> tuple(gbk_file.name.replaceAll(/\.gbk/, ""),
   file(gbk_file))}
+
+//GBKS.subscribe{println it}
+
 
 process gbk2gff3{
   label 'bioperl'
@@ -14,7 +17,7 @@ process gbk2gff3{
   publishDir "${params.outdir}/gff3/", mode: 'rellink'
 
   input:
-  tupple acc, file(gbk_file) from GBKS
+  tuple acc, file(gbk_file) from GBKS
 
   output:
   tuple file("${acc}.gff3") into GFF3S
@@ -24,7 +27,7 @@ process gbk2gff3{
   """
 }
 
-mode run_roary{
+process run_roary{
   label 'roary'
   cpus params.roary_threads
   publishDir "params.outdir/", mode: 'rellink'
