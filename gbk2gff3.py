@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
                 # Get ID numbers
                 if feat.type == 'CDS':
-                    feat_id = feat.qualifiers['locus_tag'][0]
+                    feat_id = rec_id + '.' + feat.qualifiers['locus_tag'][0]
                 elif feat.type == 'region':
                     feat_id = 'region_' + feat.qualifiers['region_number'][0]
                 elif feat.type == 'cand_cluster':

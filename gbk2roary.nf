@@ -30,7 +30,7 @@ process gbk2gff3{
 process run_roary{
   label 'roary'
   cpus params.roary_threads
-  publishDir "params.outdir/", mode: 'rellink'
+  publishDir "${params.outdir}/", mode: 'rellink'
   
   input:
   file '*.gff3' from GFF3S.collect()
