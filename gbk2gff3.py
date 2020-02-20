@@ -34,11 +34,19 @@ def process_arguments():
     required.add_argument("--output", help=("Output filename"),
                           required=True, type=str)
 
+    parser.add_argument("--type",
+                        help=("If passed only features of the ",
+                              "given type will pass"),
+                        type=str,
+                        default='')
+
     # Read arguments
     print("Reading arguments")
     args = parser.parse_args()
 
     # Processing goes here if needed
+    if args.type == '':
+        args.type = False
 
     return args
 
@@ -60,6 +68,9 @@ if __name__ == "__main__":
                     strand = '-'
                 else:
                     raise ValueError("feat.strand value not recognized ({})".format(str(feat.strand)))
+
+                if (args.type is not False) & (feat.type != args.type):
+                    continue
 
                 # Get ID numbers
                 if feat.type == 'CDS':
