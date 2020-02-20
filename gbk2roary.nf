@@ -20,7 +20,7 @@ process gbk2gff3{
   tuple acc, file(gbk_file) from GBKS
 
   output:
-  tuple file("${acc}.gff3") into GFF3S
+  file "${acc}.gff3" into GFF3S
 
   """
   ${workflow.projectDir}/gbk2gff3.py --input $gbk_file --output ${acc}.gff3 --type CDS
