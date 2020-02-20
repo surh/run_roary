@@ -26,6 +26,6 @@ need to specify in the nextflow call:
 * **indir**: Directory with input genbank files. Each genome must correspond to a single
 file with extension `.gbk` (no compressed files).
 * **outdir**: Directory for output.
-* **roary_threads**: Indicate how many threads to use for roary.`
+* **roary_threads**: Indicate how many threads to use for roary.
 
 Memory/time requrirements can be set in the `nextflow.config` file.
