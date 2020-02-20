@@ -36,7 +36,7 @@ process run_roary{
   file '*.gff3' from GFF3S.collect()
   
   output:
-  file "roary"
+  file "roary/"
   
   """
   roary -p ${params.roary_threads} \
