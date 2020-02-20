@@ -43,8 +43,9 @@ def process_arguments():
     return args
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     args = process_arguments()
+    # print("Arguments read...")
 
     with open(args.output, 'w') as gff:
         gb = SeqIO.parse(args.input, 'genbank')
