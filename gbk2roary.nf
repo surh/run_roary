@@ -2,6 +2,7 @@
 params.indir = 'genomes/'
 params.outdir = 'output'
 params.roary_threads = 8
+params.identity = 90
 
 
 GBKS = Channel.fromPath("${params.indir}/*.gbk")
@@ -34,12 +35,14 @@ process run_roary{
   
   input:
   file '*.gff3' from GFF3S.collect()
+  val identity from params.identity
   
   output:
   file "roary/"
   
   """
   roary -p ${params.roary_threads} \
+    -i $identity \
     -f roary/ \
     -v \
     *.gff3
