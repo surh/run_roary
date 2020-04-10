@@ -32,7 +32,7 @@ process gbk2faa{
   input:
   tuple genome, gbk_file from GBKS
 
-  outfile:
+  output:
   tuple genome, file("${genome}.faa") into FAAS
 
   """
