@@ -39,6 +39,11 @@ def process_arguments():
                               "given type will pass"),
                         type=str,
                         default='')
+    parser.add_argument("--no_fasta",
+                        help=("If included, the fasta sequence "
+                              "will not be appended at the end."),
+                        action="store_true",
+                        default=False)
 
     # Read arguments
     print("Reading arguments")
@@ -107,7 +112,9 @@ if __name__ == "__main__":
                             feat_id]
                 gff_line = "\t".join(gff_line) + "\n"
                 gff.write(gff_line)
-        gff.write("##FASTA\n")
-        print("Writing sequences")
-        for seq in seqs:
-            SeqIO.write(seq, gff, 'fasta')
+        
+        if not args.no_fasta:
+            gff.write("##FASTA\n")
+            print("Writing sequences")
+            for seq in seqs:
+                SeqIO.write(seq, gff, 'fasta')
